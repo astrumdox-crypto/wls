@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Профессиональная деактивация</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      /* Оранжево-красный градиент */
+      background: radial-gradient(circle at top, #2b0a0a, #130303 70%);
+      color: #ffd7b5; /* тёплый светлый оттенок */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: -20%;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 140, 0, 0.15), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(255, 60, 60, 0.12), transparent 40%),
+        radial-gradient(circle at 30% 80%, rgba(255, 100, 0, 0.1), transparent 35%);
+      filter: blur(30px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      width: 100%;
+      background: rgba(25, 8, 8, 0.75); /* глубокий тёмно-красный фон */
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 120, 0, 0.25);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow:
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 40px rgba(255, 80, 0, 0.2);
+      animation: fadeIn .6s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 8px;
+      letter-spacing: .6px;
+      color: #ffb577; /* мягкий оранжевый */
+      text-shadow: 0 0 12px rgba(255, 100, 0, 0.4);
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #ffb58a; /* персиковый */
+      margin-bottom: 10px;
+      font-size: 14px;
+      opacity: .9;
+    }
+
+    .contacts {
+      text-align: center;
+      color: #ffa25e; /* оранжевый */
+      font-weight: 600;
+      margin-bottom: 18px;
+      opacity: .95;
+    }
+
+    .tg-button {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0 26px;
+    }
+
+    .tg-button a {
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 140, 40, 0.5), rgba(200, 60, 0, 0.4));
+      color: #ffe2c1;
+      border: 1px solid rgba(255, 100, 0, 0.5);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,.6),
+        0 0 22px rgba(255, 80, 0, 0.4);
+      transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(6px);
+    }
+
+    .tg-button a:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,.7),
+        0 0 28px rgba(255, 100, 0, 0.6);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      background: rgba(40, 12, 8, 0.8); /* тёмный красновато-коричневый */
+      border: 1px solid rgba(255, 120, 0, 0.3);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 80, 0, 0.1),
+        0 12px 30px rgba(0,0,0,.5),
+        0 0 22px rgba(255, 80, 0, 0.3);
+      transition: transform .15s ease, box-shadow .15s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 100, 0, 0.2),
+        0 18px 36px rgba(0,0,0,.7),
+        0 0 30px rgba(255, 80, 0, 0.5);
+    }
+
+    .card h2 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: #ffa75e; /* оранжевый */
+      letter-spacing: .4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h2 i {
+      opacity: .9;
+      filter: drop-shadow(0 0 6px rgba(255, 100, 0, 0.6));
+    }
+
+    .list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 14px;
+      color: #ffcfaa; /* очень светлый оранжевый */
+    }
+
+    .muted {
+      color: #ffb47b; /* приглушённый оранжевый */
+      font-size: 13px;
+      margin-top: 6px;
+      opacity: .9;
+    }
+
+    @media (max-width: 700px) {
+      h1 { font-size: 20px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .container { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <div class="container">
+    <h1><i class="fa-solid fa-shield-halved"></i> ПРОФЕССИОНАЛЬНАЯ ДЕАКТИВАЦИЯ</h1>
+    <p class="subtitle">Ликвидация проблемных объектов в Telegram силами эксперта.</p>
+    <p class="contacts">Постоянный контакт для связи: @zdeletor</p>
+
+    <div class="tg-button">
+      <a href="https://t.me/unbrokensocietycold" target="_blank">
+        <i class="fa-brands fa-telegram"></i>
+        Написать в Telegram
+      </a>
+    </div>
+
+    <div class="section grid-2">
+      <div class="card">
+        <h2><i class="fa-solid fa-tags"></i> ПРАЙС-ЛИСТ (Индивидуальная работа)</h2>
+        <ul class="list">
+          <li>• Деактивация БОТА — от 10$</li>
+          <li>• Деактивация ПРИВАТНОГО ЧАТА / КАНАЛА — от 12$ (до 5000 участников)</li>
+          <li>• Деактивация ПУБЛИЧНОГО КАНАЛА — от 15$</li>
+          <li>• СРОЧНАЯ ДЕАКТИВАЦИЯ — +50% к стоимости</li>
+          <li>• Деактивация АККАУНТА — от 25$</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2><i class="fa-solid fa-gear"></i> Как происходит работа</h2>
+        <ul class="list">
+          <li>1. Вы предоставляете ссылку на объект.</li>
+          <li>2. Я провожу анализ и сообщаю итоговую стоимость и сроки.</li>
+          <li>3. После оплаты начинается выполнение работы.</li>
+          <li>4. Вы получаете подтверждающий скриншот о деактивации.</li>
+        </ul>
+        <p class="muted">
+          <i class="fa-regular fa-message"></i>
+          Предварительная консультация и оценка — БЕСПЛАТНО.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Условия</h2>
+        <ul class="list">
+          <li>• Оплата не возвращается после начала выполнения работы.</li>
+          <li>• Комиссия сети за перевод лежит на заказчике.</li>
+          <li>• Возможность и гарантия деактивации предоставляются только после анализа объекта.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
